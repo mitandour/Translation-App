@@ -1,0 +1,9 @@
+.translations {
+  display: flex;
+  justify-content: space-between;
+  height: 50vh;
+}
+
+.text-translation {
+  width: 49%;
+}

@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  height: 30vh;
+  flex-direction: column;
+}
+.title {
+  font-family: 'Montserrat',sans-serif;
+  color: #282c34;
+  font-size: 5vw;
+}
+.form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.select {
+  width: 43%;
+}
+
+.switch-icon {
+  transform: rotate(90deg);
+}
