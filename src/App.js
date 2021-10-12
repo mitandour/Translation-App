@@ -3,24 +3,33 @@ import Container from '@mui/material/Container';
 import { Languages } from './components/Languages/Languages';
 import { Translation } from './components/Translation/Translation';
 import { useState, useEffect } from 'react';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const RAPID_API_KEY = process.env.REACT_APP_RAPID_API_KEY;
+
 
 function App() {
   const [textFrom, setTextFrom] = useState("");
   const [textTo, setTextTo] = useState("");
-  const [transFrom, setTransFrom] = useState('EUR');
-  const [transTo, setTransTo] = useState('USD');
-  
+  const [transFrom, setTransFrom] = useState('en');
+  const [transTo, setTransTo] = useState('fr');
+  const [languages, setLanguages] = useState([]);
+
+
   const getLanguages = () => {
-   fetch("https://google-translate1.p.rapidapi.com/language/translate/v2/languages", {
+    console.log(RAPID_API_KEY);
+    fetch("https://google-translate1.p.rapidapi.com/language/translate/v2/languages", {
       "method": "GET",
       "headers": {
         "accept-encoding": "application/gzip",
-        "x-rapidapi-key": "095cd97d1fmshbc9a085352e7e4ap1800fajsn1f59ab6988d1",
-        "x-rapidapi-host": "google-translate1.p.rapidapi.com"
+        "x-rapidapi-host": "google-translate1.p.rapidapi.com",
+        "x-rapidapi-key": RAPID_API_KEY,
       }
     })
       .then(response => response.json())
-      .then(data => console.log("data", data))
+      .then(data => setLanguages(data.data.languages))
       .catch(err => {
         console.error(err);
       });
@@ -33,7 +42,6 @@ function App() {
   const handleTranslation = () => {
     
   }
-
   useEffect(() => {
     setTextTo("translating here....");
   }, [textFrom])
@@ -57,6 +65,7 @@ function App() {
           setTransFrom={setTransFrom}
           transTo={transTo}
           setTransTo={setTransTo}
+          languages={languages}
           handleTranslation={handleTranslation} />
         <Translation
           textFrom={textFrom}

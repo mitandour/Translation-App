@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import './Translation.css';
 
@@ -7,7 +7,7 @@ export const Translation = ({ textFrom, setTextFrom, textTo }) => {
   const handleTextChange = (e) => {
     setTextFrom(e.target.value);
   }
-  
+
   return (
     <div className="translations">
       <TextareaAutosize

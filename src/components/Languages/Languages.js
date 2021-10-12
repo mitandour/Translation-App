@@ -5,27 +5,7 @@ import Button from '@mui/material/Button';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import './Languages.css';
 
-
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
-
-export const Languages = ({transFrom, setTransFrom, transTo, setTransTo, handleTranslation}) => {
+export const Languages = ({transFrom, setTransFrom, transTo, setTransTo, languages, handleTranslation}) => {
   
 
   const handleChangeFrom = (event) => {
@@ -62,9 +42,9 @@ export const Languages = ({transFrom, setTransFrom, transTo, setTransTo, handleT
           variant="outlined"
           className='select'
         >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
+          {languages.map((option) => (
+            <MenuItem key={option.language} value={option.language}>
+              {option.language}
             </MenuItem>
           ))}
         </TextField>
@@ -82,9 +62,9 @@ export const Languages = ({transFrom, setTransFrom, transTo, setTransTo, handleT
           variant="outlined"
           className='select'
         >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
+          {languages.map((option) => (
+            <MenuItem key={option.language} value={option.language}>
+              {option.language}
             </MenuItem>
           ))}
         </TextField>
