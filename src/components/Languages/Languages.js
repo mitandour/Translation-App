@@ -5,26 +5,22 @@ import Button from '@mui/material/Button';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import './Languages.css';
 
-export const Languages = ({transFrom, setTransFrom, transTo, setTransTo, languages, handleTranslation}) => {
+export const Languages = ({source, setSource, target, setTarget, languages}) => {
   
 
   const handleChangeFrom = (event) => {
-    setTransFrom(event.target.value);
+    setSource(event.target.value);
   };
 
    const handleChangeTo = (event) => {
-    setTransTo(event.target.value);
+    setTarget(event.target.value);
   };
 
   const handleSwitch = () => {
-    const permut = transFrom;
-    setTransFrom(transTo);
-    setTransTo(permut);
+    const permut = source;
+    setSource(target);
+    setTarget(permut);
   }
-
-  useEffect(() => {
-    //alert(`translating ${transFrom} to ${transTo}`);
-  }, [transFrom, transTo])
 
   return (
     <div className="header">
@@ -37,7 +33,7 @@ export const Languages = ({transFrom, setTransFrom, transTo, setTransTo, languag
         <TextField
           select
           label="Source"
-          value={transFrom}
+          value={source}
           onChange={handleChangeFrom}
           variant="outlined"
           className='select'
@@ -57,7 +53,7 @@ export const Languages = ({transFrom, setTransFrom, transTo, setTransTo, languag
          <TextField
           select
           label="Target"
-          value={transTo}
+          value={target}
           onChange={handleChangeTo}
           variant="outlined"
           className='select'

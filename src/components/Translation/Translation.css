@@ -6,4 +6,19 @@
 
 .text-translation {
   width: 49%;
+  overflow: scroll;
+  scrollbar-width: thin;
+}
+
+@media (max-width:800px) {
+  .translations {
+    flex-direction: column;
+    height: 70vh;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+  .text-translation {
+    width: 100%;
+    
+  }
 }

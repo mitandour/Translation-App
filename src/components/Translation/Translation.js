@@ -2,10 +2,11 @@ import React from 'react'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import './Translation.css';
 
-export const Translation = ({ textFrom, setTextFrom, textTo }) => {
+export const Translation = ({ textSource, setTextSource, textTarget, handleTranslation }) => {
 
   const handleTextChange = (e) => {
-    setTextFrom(e.target.value);
+    setTextSource(e.target.value);
+    handleTranslation();
   }
 
   return (
@@ -13,17 +14,19 @@ export const Translation = ({ textFrom, setTextFrom, textTo }) => {
       <TextareaAutosize
         className="text-translation"
         minRows={15}
+        maxRows={15}
         aria-label="maximum height"
         placeholder="Translate from..."
-        value={textFrom}
+        value={textSource}
         onChange={handleTextChange}
       />
       <TextareaAutosize
         className="text-translation"
         minRows={15}
+        maxRows={15}
         aria-label="maximum height"
         placeholder="Translate to..."
-        value={textTo}
+        value={textTarget}
     />
     </div>
   )
