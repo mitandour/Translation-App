@@ -3,16 +3,8 @@ import Container from '@mui/material/Container';
 import { Languages } from './components/Languages/Languages';
 import { Translation } from './components/Translation/Translation';
 import { useState, useEffect } from 'react';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const RAPID_API_KEY = process.env.REACT_APP_RAPID_API_KEY;
-const headers = {
-  "accept-encoding": "application/gzip",
-  "x-rapidapi-host": "google-translate1.p.rapidapi.com",
-  "x-rapidapi-key": RAPID_API_KEY,
-};
+import { getLanguages } from './API/API';
+import { handleTranslation } from './API/API';
 
 function App() {
   const [textSource, setTextSource] = useState("");
@@ -21,42 +13,30 @@ function App() {
   const [target, setTarget] = useState('fr');
   const [languages, setLanguages] = useState([]);
 
-
-  const getLanguages = () => {
-    console.log(RAPID_API_KEY);
-    fetch("https://google-translate1.p.rapidapi.com/language/translate/v2/languages", {
-      "method": "GET",
-      "headers": headers
-    })
+  useEffect(() => {
+    getLanguages()
       .then(response => response.json())
       .then(data => setLanguages(data.data.languages))
       .catch(err => {
         console.error(err);
       });
-  }
- 
-
-  useEffect(() => {
-    getLanguages();
   }, [])
 
-  const handleTranslation = () => {
-    const body = {
-      "q": textSource,
-      "target": target,
-      "source": source
-    }
-    fetch("https://google-translate1.p.rapidapi.com/language/translate/v2", {
-      "method": "POST",
-      "headers": headers,
-      "body": body
-    })
+  const translate = () => {
+    handleTranslation(textSource, target, source)
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        if (data.data) {
+          const translation = data.data.translations[0].translatedText;
+          setTextTarget(translation);
+        }
+      })
     .catch(err => {
       console.error(err);
     });
   }
+  
   
 
   return (
@@ -84,7 +64,7 @@ function App() {
           textSource={textSource}
           setTextSource={setTextSource}
           textTarget={textTarget}
-          handleTranslation={handleTranslation}
+          handleTranslation={translate}
         />
       </Container>
     </div>
